@@ -1,0 +1,5 @@
+# pnpm configuration for improved network resilience
+fetch-timeout = 120000
+fetch-retries = 5
+fetch-retry-mintimeout = 10000
+fetch-retry-maxtimeout = 60000

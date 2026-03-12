@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Document Template</title>
+    <link rel="stylesheet" href="../styles/document-professional-template.css">
+</head>
+<body>
+    <div class="document-container">
+        
+        <!-- HEADER WITH BRANDING -->
+        <div class="document-header">
+            <div class="company-info">
+                <h1 class="company-name">MELITECH SOLUTIONS</h1>
+                <p class="company-tagline">Redefining Technology!!!</p>
+                <div class="company-contact">
+                    <div class="company-contact-item">+254 712 236 643/ +254 713 822 486</div>
+                    <div class="company-contact-item">info@melitechsolutions.co.ke</div>
+                    <div class="company-contact-item">P.O Box 85845 - 00200</div>
+                    <div class="company-contact-item">Nairobi, Kenya</div>
+                </div>
+            </div>
+            
+            <div class="company-logo">
+                <!-- Logo placeholder - replace with actual company logo from settings -->
+                <img src= ${companyInfo.companyLogo} alt="Melitech Solutions Logo" style="max-height: 80px;">
+            </div>
+        </div>
+
+        <!-- DOCUMENT TITLE -->
+        <h1 class="document-title">DOCUMENT TITLE</h1>
+
+        <!-- DOCUMENT METADATA -->
+        <div class="document-meta">
+            <div class="meta-item">
+                <span class="meta-label">Document #</span>
+                <span class="meta-value">DOC-00001</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Date</span>
+                <span class="meta-value">29 Jan 2025</span>
+            </div>
+        </div>
+
+        <!-- BILL TO / CLIENT DETAILS SECTION -->
+        <div class="client-details info-box" style="margin-bottom: 24px;">
+            <div style="font-weight: 700; font-size: 15px; color: var(--text-color); margin-bottom: 6px;">Bill To / Client Details</div>
+            <div style="font-size: 14px; color: var(--secondary-color);">
+                <div><strong>Client Name:</strong> [Client Name]</div>
+                <div><strong>Company:</strong> [Client Company]</div>
+                <div><strong>Email:</strong> [client@email.com]</div>
+                <div><strong>Phone:</strong> [Client Phone]</div>
+                <div><strong>Address:</strong> [Client Address]</div>
+                <div><strong>KRA PIN:</strong> [Client Tax Number]</div>
+            </div>
+        </div>
+
+        <!-- CONTENT SECTIONS -->
+        <div class="section">
+            <h2 class="section-title">Description</h2>
+            <div class="section-content">
+                <p>Document content goes here. This template provides a professional, print-persistent format for all app documentation and reports.</p>
+            </div>
+        </div>
+
+        <!-- TABLE SECTION -->
+        <div class="section">
+            <h2 class="section-title">Items List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Website Development</strong>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; color: #636e72;">Web02 - Development Package</p>
+                        </td>
+                        <td>1</td>
+                        <td>KES 7,000.00</td>
+                        <td>KES 7,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Social Media Management</strong>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; color: #636e72;">SMM(Custom) - 22 posts on Facebook, Instagram, X and LinkedIn</p>
+                        </td>
+                        <td>1</td>
+                        <td>KES 4,000.00</td>
+                        <td>KES 4,000.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- HIGHLIGHT BOX -->
+        <div class="section">
+            <div class="highlight-box">
+                <div class="highlight-label">Total Amount Due</div>
+                <div class="highlight-value">KES 14,250.00</div>
+            </div>
+        </div>
+
+        <!-- PAYMENT/INSTRUCTIONS SECTION -->
+        <div class="section">
+            <h2 class="section-title">Payment Instructions</h2>
+            <div class="two-column">
+                <div>
+                    <div class="info-box">
+                        <div class="info-label">Account Details</div>
+                        <div class="info-value" style="font-weight: 400;">
+                            Bank: Kenya Commercial Bank<br>
+                            Branch: Kitengela<br>
+                            Acc.: 1295660644<br>
+                            Acc. Name: Melitech Solutions
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box">
+                        <div class="info-label">Alternative Payment</div>
+                        <div class="info-value" style="font-weight: 400;">
+                            Mpesa Paybill: 522522<br>
+                            Acc. Number: 1295660644
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="document-footer">
+            <div class="contact-info">
+                <div class="contact-block">
+                    <span class="contact-label">MELITECH SOLUTIONS</span>
+                    <span class="contact-detail">Nairobi, KE</span>
+                    <span class="contact-detail">+254 712 236 643/ +254 713 822 486</span>
+                </div>
+                <div class="contact-block">
+                    <span class="contact-label">Contact Us</span>
+                    <span class="contact-detail">info@melitechsolutions.co.ke</span>
+                    <span class="contact-detail">www.melitechsolutions.co.ke</span>
+                </div>
+            </div>
+            <div class="footer-note">
+                For more information or queries, feel free to talk to us or send us an email on info@melitechsolutions.co.ke
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Print Button (hidden in print) -->
+    <div class="no-print" style="text-align: center; margin-top: 30px; padding: 20px;">
+        <button onclick="window.print()" style="
+            padding: 12px 24px;
+            background: #ff9f43;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        " onmouseover="this.style.background='#e07d2c'" onmouseout="this.style.background='#ff9f43'">
+            Print Document
+        </button>
+    </div>
+
+</body>
+</html>

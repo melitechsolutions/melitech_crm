@@ -1,0 +1,614 @@
+ Image melitech_crm-app Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 647B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 4.32kB 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/node:22-alpine
+#3 DONE 2.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 402B 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [builder 1/7] FROM docker.io/library/node:22-alpine@sha256:8094c002d08262dba12645a3b4a15cd6cd627d30bc782f53229a2ec13ee22a00
+#6 resolve docker.io/library/node:22-alpine@sha256:8094c002d08262dba12645a3b4a15cd6cd627d30bc782f53229a2ec13ee22a00 0.0s done
+#6 DONE 0.1s
+
+#7 [builder 2/7] WORKDIR /app
+#7 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 79.18kB 0.2s done
+#5 DONE 0.2s
+
+#8 [builder 3/7] COPY patches ./patches
+#8 DONE 0.1s
+
+#9 [builder 4/7] COPY package.json pnpm-lock.yaml ./
+#9 DONE 0.2s
+
+#10 [stage-1  3/18] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/
+#10 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 ...
+
+#10 [stage-1  3/18] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/
+#10 22.40 
+#10 22.40 added 1 package in 21s
+#10 22.40 
+#10 22.40 1 package is looking for funding
+#10 22.40   run `npm fund` for details
+#10 22.41 npm notice
+#10 22.41 npm notice New major version of npm available! 10.9.4 -> 11.11.0
+#10 22.41 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#10 22.41 npm notice To update run: npm install -g npm@11.11.0
+#10 22.41 npm notice
+#10 DONE 25.2s
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 22.38 
+#11 22.38 added 1 package in 21s
+#11 22.38 
+#11 22.38 1 package is looking for funding
+#11 22.38   run `npm fund` for details
+#11 22.39 npm notice
+#11 22.39 npm notice New major version of npm available! 10.9.4 -> 11.11.0
+#11 22.39 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#11 22.39 npm notice To update run: npm install -g npm@11.11.0
+#11 22.39 npm notice
+#11 ...
+
+#12 [stage-1  4/18] RUN apk add --no-cache netcat-openbsd
+#12 5.080 (1/3) Installing libmd (1.1.0-r0)
+#12 5.269 (2/3) Installing libbsd (0.12.2-r0)
+#12 5.411 (3/3) Installing netcat-openbsd (1.234.1-r0)
+#12 5.501 Executing busybox-1.37.0-r30.trigger
+#12 5.543 OK: 11.0 MiB in 21 packages
+#12 DONE 5.7s
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 ...
+
+#13 [stage-1  5/18] COPY patches ./patches
+#13 DONE 0.1s
+
+#14 [stage-1  6/18] COPY package.json pnpm-lock.yaml ./
+#14 DONE 0.2s
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 48.03 Lockfile is up to date, resolution step is skipped
+#11 48.25 Progress: resolved 1, reused 0, downloaded 0, added 0
+#11 48.84 Packages: +648
+#11 48.84 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#11 49.26 Progress: resolved 648, reused 0, downloaded 0, added 0
+#11 50.26 Progress: resolved 648, reused 0, downloaded 1, added 0
+#11 51.26 Progress: resolved 648, reused 0, downloaded 16, added 15
+#11 52.27 Progress: resolved 648, reused 0, downloaded 32, added 31
+#11 53.27 Progress: resolved 648, reused 0, downloaded 51, added 50
+#11 54.28 Progress: resolved 648, reused 0, downloaded 66, added 66
+#11 55.28 Progress: resolved 648, reused 0, downloaded 81, added 80
+#11 56.28 Progress: resolved 648, reused 0, downloaded 100, added 100
+#11 57.32 Progress: resolved 648, reused 0, downloaded 118, added 115
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 22.30 Lockfile is up to date, resolution step is skipped
+#15 22.58 Progress: resolved 1, reused 0, downloaded 0, added 0
+#15 23.41 Packages: +648
+#15 23.41 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#15 23.75 Progress: resolved 648, reused 0, downloaded 0, added 0
+#15 25.31 Progress: resolved 648, reused 0, downloaded 1, added 0
+#15 26.31 Progress: resolved 648, reused 0, downloaded 7, added 0
+#15 27.34 Progress: resolved 648, reused 0, downloaded 21, added 8
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 58.35 Progress: resolved 648, reused 0, downloaded 135, added 134
+#11 59.43 Progress: resolved 648, reused 0, downloaded 146, added 144
+#11 60.47 Progress: resolved 648, reused 0, downloaded 157, added 157
+#11 61.64 Progress: resolved 648, reused 0, downloaded 162, added 158
+#11 62.65 Progress: resolved 648, reused 0, downloaded 176, added 162
+#11 63.66 Progress: resolved 648, reused 0, downloaded 203, added 197
+#11 64.76 Progress: resolved 648, reused 0, downloaded 218, added 218
+#11 65.80 Progress: resolved 648, reused 0, downloaded 233, added 228
+#11 66.80 Progress: resolved 648, reused 0, downloaded 244, added 244
+#11 67.82 Progress: resolved 648, reused 0, downloaded 262, added 258
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 28.49 Progress: resolved 648, reused 0, downloaded 33, added 20
+#15 29.49 Progress: resolved 648, reused 0, downloaded 36, added 21
+#15 30.56 Progress: resolved 648, reused 0, downloaded 48, added 35
+#15 31.56 Progress: resolved 648, reused 0, downloaded 57, added 48
+#15 32.57 Progress: resolved 648, reused 0, downloaded 69, added 61
+#15 33.57 Progress: resolved 648, reused 0, downloaded 84, added 72
+#15 34.58 Progress: resolved 648, reused 0, downloaded 101, added 93
+#15 35.59 Progress: resolved 648, reused 0, downloaded 122, added 121
+#15 36.60 Progress: resolved 648, reused 0, downloaded 136, added 136
+#15 37.63 Progress: resolved 648, reused 0, downloaded 147, added 146
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 68.82 Progress: resolved 648, reused 0, downloaded 272, added 272
+#11 69.83 Progress: resolved 648, reused 0, downloaded 284, added 282
+#11 70.84 Progress: resolved 648, reused 0, downloaded 292, added 287
+#11 71.84 Progress: resolved 648, reused 0, downloaded 300, added 292
+#11 72.85 Progress: resolved 648, reused 0, downloaded 308, added 299
+#11 74.03 Progress: resolved 648, reused 0, downloaded 316, added 306
+#11 75.34 Progress: resolved 648, reused 0, downloaded 316, added 307
+#11 76.37 Progress: resolved 648, reused 0, downloaded 323, added 316
+#11 77.43 Progress: resolved 648, reused 0, downloaded 336, added 326
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 38.63 Progress: resolved 648, reused 0, downloaded 160, added 159
+#15 39.70 Progress: resolved 648, reused 0, downloaded 170, added 163
+#15 40.73 Progress: resolved 648, reused 0, downloaded 181, added 170
+#15 41.74 Progress: resolved 648, reused 0, downloaded 201, added 198
+#15 42.79 Progress: resolved 648, reused 0, downloaded 225, added 223
+#15 43.78 Progress: resolved 648, reused 0, downloaded 239, added 239
+#15 44.78 Progress: resolved 648, reused 0, downloaded 256, added 254
+#15 45.78 Progress: resolved 648, reused 0, downloaded 275, added 271
+#15 46.79 Progress: resolved 648, reused 0, downloaded 284, added 277
+#15 47.81 Progress: resolved 648, reused 0, downloaded 294, added 284
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 78.50 Progress: resolved 648, reused 0, downloaded 358, added 357
+#11 79.50 Progress: resolved 648, reused 0, downloaded 362, added 360
+#11 80.55 Progress: resolved 648, reused 0, downloaded 371, added 362
+#11 81.64 Progress: resolved 648, reused 0, downloaded 375, added 371
+#11 82.59 Progress: resolved 648, reused 0, downloaded 380, added 374
+#11 83.64 Progress: resolved 648, reused 0, downloaded 386, added 380
+#11 84.64 Progress: resolved 648, reused 0, downloaded 389, added 380
+#11 85.74 Progress: resolved 648, reused 0, downloaded 390, added 380
+#11 86.69 Progress: resolved 648, reused 0, downloaded 391, added 381
+#11 87.69 Progress: resolved 648, reused 0, downloaded 393, added 384
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 48.81 Progress: resolved 648, reused 0, downloaded 300, added 289
+#15 49.88 Progress: resolved 648, reused 0, downloaded 306, added 296
+#15 50.96 Progress: resolved 648, reused 0, downloaded 315, added 306
+#15 51.96 Progress: resolved 648, reused 0, downloaded 324, added 317
+#15 52.98 Progress: resolved 648, reused 0, downloaded 333, added 322
+#15 54.03 Progress: resolved 648, reused 0, downloaded 352, added 346
+#15 55.14 Progress: resolved 648, reused 0, downloaded 360, added 355
+#15 56.19 Progress: resolved 648, reused 0, downloaded 363, added 358
+#15 57.22 Progress: resolved 648, reused 0, downloaded 368, added 362
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 88.74 Progress: resolved 648, reused 0, downloaded 395, added 387
+#11 90.66 Progress: resolved 648, reused 0, downloaded 396, added 387
+#11 91.66 Progress: resolved 648, reused 0, downloaded 404, added 391
+#11 92.66 Progress: resolved 648, reused 0, downloaded 405, added 391
+#11 94.36 Progress: resolved 648, reused 0, downloaded 405, added 392
+#11 95.36 Progress: resolved 648, reused 0, downloaded 408, added 395
+#11 96.37 Progress: resolved 648, reused 0, downloaded 415, added 403
+#11 97.39 Progress: resolved 648, reused 0, downloaded 431, added 424
+#11 98.39 Progress: resolved 648, reused 0, downloaded 441, added 432
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 58.24 Progress: resolved 648, reused 0, downloaded 369, added 362
+#15 61.25 Progress: resolved 648, reused 0, downloaded 370, added 362
+#15 62.26 Progress: resolved 648, reused 0, downloaded 378, added 368
+#15 63.26 Progress: resolved 648, reused 0, downloaded 379, added 368
+#15 64.27 Progress: resolved 648, reused 0, downloaded 380, added 368
+#15 65.26 Progress: resolved 648, reused 0, downloaded 383, added 369
+#15 66.26 Progress: resolved 648, reused 0, downloaded 384, added 373
+#15 67.27 Progress: resolved 648, reused 0, downloaded 392, added 379
+#15 68.48 Progress: resolved 648, reused 0, downloaded 392, added 380
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 99.39 Progress: resolved 648, reused 0, downloaded 449, added 440
+#11 100.4 Progress: resolved 648, reused 0, downloaded 454, added 453
+#11 101.4 Progress: resolved 648, reused 0, downloaded 455, added 453
+#11 102.4 Progress: resolved 648, reused 0, downloaded 455, added 455
+#11 103.1 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@babel/helper-string-parser/-/helper-string-parser-7.27.1.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 103.1 ÔÇëWARNÔÇë GET https://registry.npmjs.org/estree-walker/-/estree-walker-2.0.2.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 103.9 ÔÇëWARNÔÇë GET https://registry.npmjs.org/magic-string/-/magic-string-0.30.19.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 69.49 Progress: resolved 648, reused 0, downloaded 393, added 380
+#15 70.51 Progress: resolved 648, reused 0, downloaded 394, added 380
+#15 71.48 Progress: resolved 648, reused 0, downloaded 405, added 391
+#15 72.48 Progress: resolved 648, reused 0, downloaded 406, added 401
+#15 73.49 Progress: resolved 648, reused 0, downloaded 407, added 405
+#15 74.04 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/d3-interpolate/-/d3-interpolate-3.0.4.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.08 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/d3-scale/-/d3-scale-4.0.9.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.15 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/d3-shape/-/d3-shape-3.1.7.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.26 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/d3-time/-/d3-time-3.0.4.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.31 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/d3-path/-/d3-path-3.1.1.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.35 ÔÇëWARNÔÇë GET https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.36 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/d3-timer/-/d3-timer-3.0.2.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.39 ÔÇëWARNÔÇë GET https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.49 Progress: resolved 648, reused 0, downloaded 407, added 407
+#15 74.50 ÔÇëWARNÔÇë GET https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.1.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 74.78 ÔÇëWARNÔÇë GET https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 76.95 Progress: resolved 648, reused 0, downloaded 408, added 407
+#15 77.94 Progress: resolved 648, reused 0, downloaded 410, added 410
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 108.8 Progress: resolved 648, reused 0, downloaded 456, added 455
+#11 109.8 Progress: resolved 648, reused 0, downloaded 456, added 456
+#11 110.8 Progress: resolved 648, reused 0, downloaded 457, added 457
+#11 111.9 Progress: resolved 648, reused 0, downloaded 458, added 457
+#11 112.9 Progress: resolved 648, reused 0, downloaded 462, added 461
+#11 114.5 Progress: resolved 648, reused 0, downloaded 466, added 465
+#11 116.1 Progress: resolved 648, reused 0, downloaded 467, added 466
+#11 117.1 Progress: resolved 648, reused 0, downloaded 475, added 475
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 78.95 Progress: resolved 648, reused 0, downloaded 412, added 412
+#15 79.95 Progress: resolved 648, reused 0, downloaded 416, added 416
+#15 80.95 Progress: resolved 648, reused 0, downloaded 418, added 418
+#15 81.96 Progress: resolved 648, reused 0, downloaded 426, added 425
+#15 82.96 Progress: resolved 648, reused 0, downloaded 438, added 438
+#15 83.99 Progress: resolved 648, reused 0, downloaded 444, added 443
+#15 85.49 Progress: resolved 648, reused 0, downloaded 447, added 444
+#15 86.48 Progress: resolved 648, reused 0, downloaded 450, added 450
+#15 87.53 Progress: resolved 648, reused 0, downloaded 457, added 456
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 118.2 Progress: resolved 648, reused 0, downloaded 482, added 482
+#11 119.2 Progress: resolved 648, reused 0, downloaded 484, added 484
+#11 120.2 Progress: resolved 648, reused 0, downloaded 492, added 487
+#11 121.3 Progress: resolved 648, reused 0, downloaded 497, added 495
+#11 122.3 Progress: resolved 648, reused 0, downloaded 502, added 499
+#11 123.4 Progress: resolved 648, reused 0, downloaded 502, added 501
+#11 124.4 Progress: resolved 648, reused 0, downloaded 505, added 501
+#11 125.8 Progress: resolved 648, reused 0, downloaded 506, added 501
+#11 127.5 Progress: resolved 648, reused 0, downloaded 513, added 506
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 88.59 Progress: resolved 648, reused 0, downloaded 464, added 464
+#15 89.59 Progress: resolved 648, reused 0, downloaded 468, added 468
+#15 90.60 Progress: resolved 648, reused 0, downloaded 471, added 468
+#15 91.64 Progress: resolved 648, reused 0, downloaded 477, added 471
+#15 92.68 Progress: resolved 648, reused 0, downloaded 479, added 477
+#15 93.72 Progress: resolved 648, reused 0, downloaded 480, added 478
+#15 95.51 Progress: resolved 648, reused 0, downloaded 481, added 478
+#15 96.76 Progress: resolved 648, reused 0, downloaded 483, added 480
+#15 97.82 Progress: resolved 648, reused 0, downloaded 486, added 480
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 128.6 Progress: resolved 648, reused 0, downloaded 514, added 514
+#11 129.6 Progress: resolved 648, reused 0, downloaded 515, added 515
+#11 130.8 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@babel/helper-compilation-targets/-/helper-compilation-targets-7.27.2.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 130.8 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.28.4.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 130.8 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@babel/helper-validator-option/-/helper-validator-option-7.27.1.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 130.8 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/serve-static/-/serve-static-1.15.9.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 130.9 ÔÇëWARNÔÇë GET https://registry.npmjs.org/@types/send/-/send-0.17.5.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 131.1 ÔÇëWARNÔÇë GET https://registry.npmjs.org/baseline-browser-mapping/-/baseline-browser-mapping-2.8.12.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#11 131.8 Progress: resolved 648, reused 0, downloaded 516, added 515
+#11 132.8 Progress: resolved 648, reused 0, downloaded 520, added 519
+#11 133.8 Progress: resolved 648, reused 0, downloaded 525, added 525
+#11 134.8 Progress: resolved 648, reused 0, downloaded 532, added 531
+#11 136.1 Progress: resolved 648, reused 0, downloaded 539, added 537
+#11 137.0 Progress: resolved 648, reused 0, downloaded 541, added 539
+#11 137.9 Progress: resolved 648, reused 0, downloaded 545, added 545
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 98.84 Progress: resolved 648, reused 0, downloaded 490, added 486
+#15 99.84 Progress: resolved 648, reused 0, downloaded 492, added 492
+#15 101.1 Progress: resolved 648, reused 0, downloaded 493, added 492
+#15 102.1 Progress: resolved 648, reused 0, downloaded 503, added 502
+#15 103.1 Progress: resolved 648, reused 0, downloaded 515, added 515
+#15 104.1 Progress: resolved 648, reused 0, downloaded 525, added 521
+#15 105.4 Progress: resolved 648, reused 0, downloaded 533, added 528
+#15 106.3 Progress: resolved 648, reused 0, downloaded 535, added 528
+#15 107.2 Progress: resolved 648, reused 0, downloaded 541, added 535
+#15 108.3 Progress: resolved 648, reused 0, downloaded 543, added 543
+#15 109.7 Progress: resolved 648, reused 0, downloaded 544, added 543
+#15 110.7 Progress: resolved 648, reused 0, downloaded 544, added 544
+#15 111.5 ÔÇëWARNÔÇë GET https://registry.npmjs.org/cross-env/-/cross-env-10.1.0.tgz error (ETIMEDOUT). Will retry in 10 seconds. 5 retries left.
+#15 111.7 Progress: resolved 648, reused 0, downloaded 546, added 546
+#15 113.4 Progress: resolved 648, reused 0, downloaded 547, added 546
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 144.2 Progress: resolved 648, reused 0, downloaded 546, added 545
+#11 145.2 Progress: resolved 648, reused 0, downloaded 560, added 560
+#11 146.2 Progress: resolved 648, reused 0, downloaded 565, added 565
+#11 147.3 Progress: resolved 648, reused 0, downloaded 568, added 568
+#11 148.5 Progress: resolved 648, reused 0, downloaded 579, added 576
+#11 149.5 Progress: resolved 648, reused 0, downloaded 582, added 581
+#11 150.5 Progress: resolved 648, reused 0, downloaded 585, added 583
+#11 151.8 Progress: resolved 648, reused 0, downloaded 591, added 590
+#11 152.8 Progress: resolved 648, reused 0, downloaded 597, added 596
+#11 154.0 Progress: resolved 648, reused 0, downloaded 600, added 600
+#11 155.1 Progress: resolved 648, reused 0, downloaded 608, added 602
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 114.4 Progress: resolved 648, reused 0, downloaded 560, added 560
+#15 115.4 Progress: resolved 648, reused 0, downloaded 567, added 567
+#15 116.4 Progress: resolved 648, reused 0, downloaded 571, added 571
+#15 117.4 Progress: resolved 648, reused 0, downloaded 580, added 580
+#15 118.7 Progress: resolved 648, reused 0, downloaded 585, added 584
+#15 119.7 Progress: resolved 648, reused 0, downloaded 588, added 586
+#15 120.8 Progress: resolved 648, reused 0, downloaded 593, added 593
+#15 122.4 Progress: resolved 648, reused 0, downloaded 602, added 602
+#15 123.4 Progress: resolved 648, reused 0, downloaded 609, added 605
+#15 124.6 Progress: resolved 648, reused 0, downloaded 615, added 609
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 156.2 Progress: resolved 648, reused 0, downloaded 619, added 618
+#11 157.5 Progress: resolved 648, reused 0, downloaded 626, added 623
+#11 158.6 Progress: resolved 648, reused 0, downloaded 630, added 626
+#11 159.6 Progress: resolved 648, reused 0, downloaded 637, added 630
+#11 160.6 Progress: resolved 648, reused 0, downloaded 642, added 641
+#11 161.6 Progress: resolved 648, reused 0, downloaded 644, added 643
+#11 162.6 Progress: resolved 648, reused 0, downloaded 646, added 646
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 125.6 Progress: resolved 648, reused 0, downloaded 623, added 623
+#15 126.7 Progress: resolved 648, reused 0, downloaded 626, added 623
+#15 127.8 Progress: resolved 648, reused 0, downloaded 631, added 626
+#15 128.9 Progress: resolved 648, reused 0, downloaded 633, added 627
+#15 129.9 Progress: resolved 648, reused 0, downloaded 638, added 631
+#15 130.9 Progress: resolved 648, reused 0, downloaded 642, added 633
+#15 131.9 Progress: resolved 648, reused 0, downloaded 643, added 634
+#15 133.0 Progress: resolved 648, reused 0, downloaded 644, added 643
+#15 134.6 Progress: resolved 648, reused 0, downloaded 645, added 643
+#15 135.6 Progress: resolved 648, reused 0, downloaded 646, added 646
+#15 ...
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 166.5 Progress: resolved 648, reused 0, downloaded 647, added 646
+#11 167.5 Progress: resolved 648, reused 0, downloaded 647, added 647
+#11 168.5 Progress: resolved 648, reused 0, downloaded 648, added 647
+#11 168.9 Progress: resolved 648, reused 0, downloaded 648, added 648, done
+#11 171.3 
+#11 171.3 dependencies:
+#11 171.3 + @aws-sdk/client-s3 3.907.0
+#11 171.3 + @aws-sdk/s3-request-presigner 3.907.0
+#11 171.3 + @radix-ui/react-accordion 1.2.12
+#11 171.3 + @radix-ui/react-alert-dialog 1.1.15
+#11 171.3 + @radix-ui/react-aspect-ratio 1.1.7
+#11 171.3 + @radix-ui/react-avatar 1.1.10
+#11 171.3 + @radix-ui/react-checkbox 1.3.3
+#11 171.3 + @radix-ui/react-collapsible 1.1.12
+#11 171.3 + @radix-ui/react-context-menu 2.2.16
+#11 171.3 + @radix-ui/react-dialog 1.1.15
+#11 171.3 + @radix-ui/react-dropdown-menu 2.1.16
+#11 171.3 + @radix-ui/react-hover-card 1.1.15
+#11 171.3 + @radix-ui/react-icons 1.3.2
+#11 171.3 + @radix-ui/react-label 2.1.7
+#11 171.3 + @radix-ui/react-menubar 1.1.16
+#11 171.3 + @radix-ui/react-navigation-menu 1.2.14
+#11 171.3 + @radix-ui/react-popover 1.1.15
+#11 171.3 + @radix-ui/react-progress 1.1.7
+#11 171.3 + @radix-ui/react-radio-group 1.3.8
+#11 171.3 + @radix-ui/react-scroll-area 1.2.10
+#11 171.3 + @radix-ui/react-select 2.2.6
+#11 171.3 + @radix-ui/react-separator 1.1.7
+#11 171.3 + @radix-ui/react-slider 1.3.6
+#11 171.3 + @radix-ui/react-slot 1.2.3
+#11 171.3 + @radix-ui/react-switch 1.2.6
+#11 171.3 + @radix-ui/react-tabs 1.1.13
+#11 171.3 + @radix-ui/react-toggle 1.1.10
+#11 171.3 + @radix-ui/react-toggle-group 1.1.11
+#11 171.3 + @radix-ui/react-tooltip 1.2.8
+#11 171.3 + @tanstack/react-query 5.90.2
+#11 171.3 + @trpc/client 11.6.0
+#11 171.3 + @trpc/react-query 11.6.0
+#11 171.3 + @trpc/server 11.6.0
+#11 171.3 + axios 1.12.2
+#11 171.3 + bcryptjs 3.0.3
+#11 171.3 + class-variance-authority 0.7.1
+#11 171.3 + clsx 2.1.1
+#11 171.3 + cmdk 1.1.1
+#11 171.3 + cookie 1.0.2
+#11 171.3 + cookie-parser 1.4.7
+#11 171.3 + cron 3.5.0
+#11 171.3 + csurf 1.11.0
+#11 171.3 + date-fns 4.1.0
+#11 171.3 + dotenv 17.2.3
+#11 171.3 + drizzle-orm 0.44.6
+#11 171.3 + embla-carousel-react 8.6.0
+#11 171.3 + exceljs 4.4.0
+#11 171.3 + express 4.21.2
+#11 171.3 + express-rate-limit 7.5.1
+#11 171.3 + framer-motion 12.23.22
+#11 171.3 + input-otp 1.4.2
+#11 171.3 + jose 6.1.0
+#11 171.3 + jspdf 3.0.3
+#11 171.3 + jspdf-autotable 5.0.2
+#11 171.3 + lucide-react 0.453.0
+#11 171.3 + mysql2 3.15.1
+#11 171.3 + nanoid 5.1.6
+#11 171.3 + next-themes 0.4.6
+#11 171.3 + nodemailer 6.10.1
+#11 171.3 + react 19.2.0
+#11 171.3 + react-day-picker 9.11.1
+#11 171.3 + react-dom 19.2.0
+#11 171.3 + react-hook-form 7.64.0
+#11 171.3 + react-resizable-panels 3.0.6
+#11 171.3 + recharts 2.15.4
+#11 171.3 + sanitize-html 2.17.1
+#11 171.3 + sonner 2.0.7
+#11 171.3 + superjson 1.13.3
+#11 171.3 + tailwind-merge 3.3.1
+#11 171.3 + tailwindcss-animate 1.0.7
+#11 171.3 + uuid 13.0.0
+#11 171.3 + vaul 1.1.2
+#11 171.3 + wouter 3.7.1
+#11 171.3 + xlsx 0.18.5
+#11 171.3 + zod 4.1.12
+#11 171.3 
+#11 171.3 devDependencies:
+#11 171.3 + @builder.io/vite-plugin-jsx-loc 0.1.1
+#11 171.3 + @tailwindcss/typography 0.5.19
+#11 171.3 + @tailwindcss/vite 4.1.14
+#11 171.3 + @types/express 4.17.21
+#11 171.3 + @types/node 24.7.0
+#11 171.3 + @types/react 19.2.2
+#11 171.3 + @types/react-dom 19.2.1
+#11 171.3 + @vitejs/plugin-react 5.0.4
+#11 171.3 + add 2.0.6
+#11 171.3 + autoprefixer 10.4.21
+#11 171.3 + cross-env 10.1.0
+#11 171.3 + drizzle-kit 0.31.5
+#11 171.3 + esbuild 0.25.10
+#11 171.3 + pnpm 10.18.0
+#11 171.3 + postcss 8.5.6
+#11 171.3 + prettier 3.6.2
+#11 171.3 + tailwindcss 4.1.14
+#11 171.3 + tsx 4.20.6
+#11 171.3 + tw-animate-css 1.4.0
+#11 171.3 + typescript 5.9.3
+#11 171.3 + vite 7.1.9
+#11 171.3 + vitest 2.1.9
+#11 171.3 
+#11 171.3 Done in 2m 4.7s using pnpm v10.4.1
+#11 ...
+
+#15 [stage-1  7/18] RUN pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#15 136.6 Progress: resolved 648, reused 0, downloaded 647, added 647
+#15 137.3 Progress: resolved 648, reused 0, downloaded 648, added 648, done
+#15 139.6 
+#15 139.6 dependencies:
+#15 139.6 + @aws-sdk/client-s3 3.907.0
+#15 139.6 + @aws-sdk/s3-request-presigner 3.907.0
+#15 139.6 + @radix-ui/react-accordion 1.2.12
+#15 139.6 + @radix-ui/react-alert-dialog 1.1.15
+#15 139.6 + @radix-ui/react-aspect-ratio 1.1.7
+#15 139.6 + @radix-ui/react-avatar 1.1.10
+#15 139.6 + @radix-ui/react-checkbox 1.3.3
+#15 139.6 + @radix-ui/react-collapsible 1.1.12
+#15 139.6 + @radix-ui/react-context-menu 2.2.16
+#15 139.6 + @radix-ui/react-dialog 1.1.15
+#15 139.6 + @radix-ui/react-dropdown-menu 2.1.16
+#15 139.6 + @radix-ui/react-hover-card 1.1.15
+#15 139.6 + @radix-ui/react-icons 1.3.2
+#15 139.6 + @radix-ui/react-label 2.1.7
+#15 139.6 + @radix-ui/react-menubar 1.1.16
+#15 139.6 + @radix-ui/react-navigation-menu 1.2.14
+#15 139.6 + @radix-ui/react-popover 1.1.15
+#15 139.6 + @radix-ui/react-progress 1.1.7
+#15 139.6 + @radix-ui/react-radio-group 1.3.8
+#15 139.6 + @radix-ui/react-scroll-area 1.2.10
+#15 139.6 + @radix-ui/react-select 2.2.6
+#15 139.6 + @radix-ui/react-separator 1.1.7
+#15 139.6 + @radix-ui/react-slider 1.3.6
+#15 139.6 + @radix-ui/react-slot 1.2.3
+#15 139.6 + @radix-ui/react-switch 1.2.6
+#15 139.6 + @radix-ui/react-tabs 1.1.13
+#15 139.6 + @radix-ui/react-toggle 1.1.10
+#15 139.6 + @radix-ui/react-toggle-group 1.1.11
+#15 139.6 + @radix-ui/react-tooltip 1.2.8
+#15 139.6 + @tanstack/react-query 5.90.2
+#15 139.6 + @trpc/client 11.6.0
+#15 139.6 + @trpc/react-query 11.6.0
+#15 139.6 + @trpc/server 11.6.0
+#15 139.6 + axios 1.12.2
+#15 139.6 + bcryptjs 3.0.3
+#15 139.6 + class-variance-authority 0.7.1
+#15 139.6 + clsx 2.1.1
+#15 139.6 + cmdk 1.1.1
+#15 139.6 + cookie 1.0.2
+#15 139.6 + cookie-parser 1.4.7
+#15 139.6 + cron 3.5.0
+#15 139.6 + csurf 1.11.0
+#15 139.6 + date-fns 4.1.0
+#15 139.6 + dotenv 17.2.3
+#15 139.6 + drizzle-orm 0.44.6
+#15 139.6 + embla-carousel-react 8.6.0
+#15 139.6 + exceljs 4.4.0
+#15 139.6 + express 4.21.2
+#15 139.6 + express-rate-limit 7.5.1
+#15 139.6 + framer-motion 12.23.22
+#15 139.6 + input-otp 1.4.2
+#15 139.6 + jose 6.1.0
+#15 139.6 + jspdf 3.0.3
+#15 139.6 + jspdf-autotable 5.0.2
+#15 139.6 + lucide-react 0.453.0
+#15 139.6 + mysql2 3.15.1
+#15 139.6 + nanoid 5.1.6
+#15 139.6 + next-themes 0.4.6
+#15 139.6 + nodemailer 6.10.1
+#15 139.6 + react 19.2.0
+#15 139.6 + react-day-picker 9.11.1
+#15 139.6 + react-dom 19.2.0
+#15 139.6 + react-hook-form 7.64.0
+#15 139.6 + react-resizable-panels 3.0.6
+#15 139.6 + recharts 2.15.4
+#15 139.6 + sanitize-html 2.17.1
+#15 139.6 + sonner 2.0.7
+#15 139.6 + superjson 1.13.3
+#15 139.6 + tailwind-merge 3.3.1
+#15 139.6 + tailwindcss-animate 1.0.7
+#15 139.6 + uuid 13.0.0
+#15 139.6 + vaul 1.1.2
+#15 139.6 + wouter 3.7.1
+#15 139.6 + xlsx 0.18.5
+#15 139.6 + zod 4.1.12
+#15 139.6 
+#15 139.6 devDependencies:
+#15 139.6 + @builder.io/vite-plugin-jsx-loc 0.1.1
+#15 139.6 + @tailwindcss/typography 0.5.19
+#15 139.6 + @tailwindcss/vite 4.1.14
+#15 139.6 + @types/express 4.17.21
+#15 139.6 + @types/node 24.7.0
+#15 139.6 + @types/react 19.2.2
+#15 139.6 + @types/react-dom 19.2.1
+#15 139.6 + @vitejs/plugin-react 5.0.4
+#15 139.6 + add 2.0.6
+#15 139.6 + autoprefixer 10.4.21
+#15 139.6 + cross-env 10.1.0
+#15 139.6 + drizzle-kit 0.31.5
+#15 139.6 + esbuild 0.25.10
+#15 139.6 + pnpm 10.18.0
+#15 139.6 + postcss 8.5.6
+#15 139.6 + prettier 3.6.2
+#15 139.6 + tailwindcss 4.1.14
+#15 139.6 + tsx 4.20.6
+#15 139.6 + tw-animate-css 1.4.0
+#15 139.6 + typescript 5.9.3
+#15 139.6 + vite 7.1.9
+#15 139.6 + vitest 2.1.9
+#15 139.6 
+#15 139.6 Done in 1m 59.5s using pnpm v10.4.1
+#15 DONE 141.1s
+
+#11 [builder 5/7] RUN npm install -g pnpm --no-save &&     npm config set registry https://registry.npmjs.org/ &&     pnpm config set registry https://registry.npmjs.org/ &&     pnpm config set fetch-timeout 120000 &&     pnpm config set fetch-retries 5 &&     pnpm config set auto-install-peers true &&     pnpm install --frozen-lockfile --ignore-scripts
+#11 DONE 172.3s
+
+#16 [builder 6/7] COPY . .
+#16 DONE 5.1s
+
+#17 [builder 7/7] RUN pnpm build
+#17 3.880 
+#17 3.880 > melitech_crm@1.0.0 build /app
+#17 3.880 > vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+#17 3.880 
+#17 5.564 vite v7.1.9 building for production...
+#17 6.095 transforming...
+

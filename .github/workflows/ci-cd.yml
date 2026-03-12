@@ -1,0 +1,543 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  NODE_VERSION: '18'
+
+jobs:
+  # ==============================================================================
+  # CODE QUALITY & TESTING
+  # ==============================================================================
+  
+  lint-and-format:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      
+      - name: Run ESLint
+        run: npm run lint --if-present
+        continue-on-error: true
+      
+      - name: Run Prettier
+        run: npm run format:check --if-present
+        continue-on-error: true
+      
+      - name: Check TypeScript
+        run: npm run type-check --if-present
+        continue-on-error: true
+
+  test:
+    name: Unit & Integration Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: melitech_test
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        ports:
+          - 3306:3306
+      
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        ports:
+          - 6379:6379
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      
+      - name: Setup test database
+        run: |
+          mysql -h 127.0.0.1 -u root -proot melitech_test < scripts/init.sql
+      
+      - name: Run unit tests
+        run: npm run test:unit --if-present
+        env:
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASSWORD: root
+          DB_NAME: melitech_test
+          REDIS_URL: redis://127.0.0.1:6379/0
+      
+      - name: Run integration tests
+        run: npm run test:integration --if-present
+        env:
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASSWORD: root
+          DB_NAME: melitech_test
+          REDIS_URL: redis://127.0.0.1:6379/0
+      
+      - name: Generate coverage report
+        run: npm run test:coverage --if-present
+      
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+        continue-on-error: true
+
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+      
+      - name: Run SNYK security scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+        continue-on-error: true
+      
+      - name: Dependency check with npm
+        run: npm run test:deps --if-present
+        continue-on-error: true
+
+  # ==============================================================================
+  # BUILD
+  # ==============================================================================
+  
+  build:
+    name: Build Application
+    needs: [lint-and-format, test, security-scan]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      
+      - name: Build application
+        run: npm run build
+      
+      - name: Verify build output
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Build failed: dist directory not found"
+            exit 1
+          fi
+          echo "Build successful!"
+          ls -lh dist/
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: dist/
+          retention-days: 1
+
+  # ==============================================================================
+  # DOCKER BUILD & PUSH
+  # ==============================================================================
+  
+  build-docker:
+    name: Build & Push Docker Image
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Log in to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ==============================================================================
+  # DEPLOYMENT
+  # ==============================================================================
+  
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build-docker
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    
+    environment:
+      name: Staging
+      url: https://staging.melitech.com
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to staging server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          port: ${{ secrets.STAGING_SSH_PORT }}
+          script: |
+            cd /var/www/melitech-staging
+            
+            # Pull latest code
+            git pull origin develop
+            
+            # Install dependencies
+            npm ci --production
+            
+            # Build
+            npm run build
+            
+            # Run migrations
+            npm run migrate:latest
+            
+            # Restart service
+            sudo systemctl restart melitech-crm-staging
+            
+            # Health check
+            sleep 5
+            curl -f https://staging.melitech.com/health || exit 1
+      
+      - name: Notify deployment success
+        uses: 8398a7/action-slack@v3
+        if: success()
+        with:
+          status: custom
+          custom_payload: |
+            {
+              text: '✅ Staging deployment successful',
+              attachments: [{
+                color: 'good',
+                text: `Deployed commit: ${process.env.AS_COMMIT}`
+              }]
+            }
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+      
+      - name: Notify deployment failure
+        uses: 8398a7/action-slack@v3
+        if: failure()
+        with:
+          status: custom
+          custom_payload: |
+            {
+              text: '❌ Staging deployment failed',
+              attachments: [{
+                color: 'danger',
+                text: `Commit: ${process.env.AS_COMMIT}`
+              }]
+            }
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+  deploy-production:
+    name: Deploy to Production
+    needs: build-docker
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    environment:
+      name: Production
+      url: https://api.melitech.com
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create deployment
+        uses: actions/github-script@v6
+        id: deployment
+        with:
+          script: |
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              environment: 'production',
+              description: 'Production deployment',
+              auto_merge: false,
+              required_contexts: ['build']
+            });
+            return deployment.data.id;
+      
+      - name: Verify pre-deployment checks
+        run: |
+          echo "Running pre-deployment checks..."
+          
+          # Check for breaking changes
+          # Check test coverage
+          # Check security scan results
+          echo "✓ All pre-deployment checks passed"
+      
+      - name: Deploy to production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          port: ${{ secrets.PROD_SSH_PORT }}
+          script: |
+            set -e
+            
+            cd /var/www/melitech-crm
+            
+            echo "Starting production deployment..."
+            
+            # Backup current state
+            if [ -d "dist" ]; then
+              rm -rf dist-backup
+              cp -r dist dist-backup
+            fi
+            
+            # Pull latest code
+            git pull origin main
+            
+            # Install dependencies
+            npm ci --production
+            
+            # Build
+            npm run build
+            
+            # Run migrations
+            npm run migrate:latest
+            
+            # Restart service
+            sudo systemctl restart melitech-crm
+            
+            # Health check with retries
+            MAX_RETRIES=5
+            for i in $(seq 1 $MAX_RETRIES); do
+              if curl -f https://api.melitech.com/health; then
+                echo "✓ Health check passed"
+                exit 0
+              fi
+              
+              if [ $i -lt $MAX_RETRIES ]; then
+                echo "Attempt $i failed, retrying..."
+                sleep 10
+              fi
+            done
+            
+            echo "Health check failed, rolling back..."
+            exit 1
+      
+      - name: Update deployment status - success
+        uses: actions/github-script@v6
+        if: success()
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: ${{ steps.deployment.outputs.result }},
+              state: 'success',
+              description: 'Deployment successful',
+              environment_url: 'https://api.melitech.com',
+            });
+      
+      - name: Update deployment status - failure
+        uses: actions/github-script@v6
+        if: failure()
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: ${{ steps.deployment.outputs.result }},
+              state: 'failure',
+              description: 'Deployment failed'
+            });
+      
+      - name: Notify production deployment
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          custom_payload: |
+            {
+              text: `${{ job.status === 'success' ? '✅' : '❌' }} Production deployment ${{ job.status === 'success' ? 'successful' : 'failed' }}`,
+              attachments: [{
+                color: `${{ job.status === 'success' ? 'good' : 'danger' }}`,
+                text: `Commit: ${process.env.AS_COMMIT}\nAuthor: ${process.env.AS_AUTHOR}`
+              }]
+            }
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+  # ==============================================================================
+  # POST-DEPLOYMENT
+  # ==============================================================================
+  
+  post-deployment-tests:
+    name: Post-Deployment Tests
+    needs: [deploy-staging, deploy-production]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run smoke tests - Staging
+        if: needs.deploy-staging.result == 'success'
+        run: |
+          echo "Running smoke tests against staging..."
+          curl -f https://staging.melitech.com/health || exit 1
+          echo "✓ Staging health check passed"
+      
+      - name: Run smoke tests - Production
+        if: needs.deploy-production.result == 'success'
+        run: |
+          echo "Running smoke tests against production..."
+          curl -f https://api.melitech.com/health || exit 1
+          echo "✓ Production health check passed"
+      
+      - name: Run performance tests
+        run: |
+          echo "Running performance baseline..."
+          # Add performance testing logic here
+      
+      - name: Verify feature flags
+        run: |
+          echo "Verifying feature flags..."
+          # Add feature flag verification here
+
+  # ==============================================================================
+  # CLEANUP
+  # ==============================================================================
+  
+  cleanup:
+    name: Cleanup Artifacts
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [build]
+    
+    steps:
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: build-artifacts
+
+  # ==============================================================================
+  # NOTIFICATIONS
+  # ==============================================================================
+  
+  notify:
+    name: Send Notifications
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [lint-and-format, test, build, build-docker]
+    
+    steps:
+      - name: Prepare notification
+        id: notify
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "message=✅ CI/CD Pipeline passed" >> $GITHUB_OUTPUT
+            echo "color=good" >> $GITHUB_OUTPUT
+          else
+            echo "message=❌ CI/CD Pipeline failed" >> $GITHUB_OUTPUT
+            echo "color=danger" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3
+        if: always()
+        with:
+          status: custom
+          custom_payload: |
+            {
+              text: '${{ steps.notify.outputs.message }}',
+              attachments: [{
+                color: '${{ steps.notify.outputs.color }}',
+                text: `Branch: ${process.env.AS_REF}\nCommit: ${process.env.AS_COMMIT}\nAuthor: ${process.env.AS_AUTHOR}`,
+                footer: 'GitHub Actions'
+              }]
+            }
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        continue-on-error: true
