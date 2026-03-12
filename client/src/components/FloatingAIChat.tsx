@@ -86,7 +86,7 @@ export function FloatingAIChat() {
     setInput('');
 
     await chatMutation.mutateAsync({
-      messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
+      message: input,
     });
   };
 

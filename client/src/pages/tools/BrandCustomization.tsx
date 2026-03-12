@@ -124,7 +124,6 @@ const normalizeHexColor = (color: string): string => {
 const formatBrandConfig = (config: BrandConfig): BrandConfig => {
   // Ensure all color fields are valid hex colors
   return {
-    ...config,
     primaryColor: isValidHexColor(config.primaryColor) ? config.primaryColor : normalizeHexColor(config.primaryColor),
     secondaryColor: isValidHexColor(config.secondaryColor) ? config.secondaryColor : normalizeHexColor(config.secondaryColor),
     accentColor: isValidHexColor(config.accentColor) ? config.accentColor : normalizeHexColor(config.accentColor),
@@ -135,6 +134,12 @@ const formatBrandConfig = (config: BrandConfig): BrandConfig => {
     darkGray: isValidHexColor(config.darkGray) ? config.darkGray : normalizeHexColor(config.darkGray),
     lightText: isValidHexColor(config.lightText) ? config.lightText : normalizeHexColor(config.lightText),
     darkText: isValidHexColor(config.darkText) ? config.darkText : normalizeHexColor(config.darkText),
+    fontFamily: config.fontFamily,
+    headingFontSize: config.headingFontSize,
+    bodyFontSize: config.bodyFontSize,
+    buttonBorderRadius: config.buttonBorderRadius,
+    buttonPadding: config.buttonPadding,
+    buttonFontWeight: config.buttonFontWeight,
   };
 };
 

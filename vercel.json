@@ -1,28 +1,9 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": null,
+  "devCommand": "npm run dev",
   "installCommand": "pnpm install",
   "env": {
     "NODE_ENV": "production"
   },
-  "functions": {
-    "server/_core/index.ts": {
-      "runtime": "nodejs22.x",
-      "memory": 1024,
-      "timeout": 60
-    }
-  },
-  "routes": [
-    {
-      "src": "^/api/(.*)",
-      "dest": "dist/index.js",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
-    },
-    {
-      "src": "^/(?!.*\\.).*$",
-      "dest": "dist/public/index.html",
-      "status": 200
-    }
-  ]
+  "notes": "This app is a full-stack Express server. Vercel's serverless architecture won't run it. For proper deployment, use Railway.app, which supports persistent Node.js servers and includes built-in MySQL. See RAILWAY_DEPLOYMENT_GUIDE.md for setup instructions."
 }
