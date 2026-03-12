@@ -351,7 +351,7 @@ Dedicated portal for clients to:
 ### Infrastructure
 - **S3** - File storage
 - **SMTP** - Email delivery
-- **OAuth** - Authentication (Manus Auth)
+- **OAuth** - Authentication
 
 ---
 
@@ -445,7 +445,7 @@ VITE_ANALYTICS_ENDPOINT=https://analytics.example.com
 VITE_ANALYTICS_WEBSITE_ID=your-website-id
 
 # Built-in Services
-BUILT_IN_FORGE_API_URL=https://forge.manus.im
+BUILT_IN_FORGE_API_URL=your-forge-api-url
 BUILT_IN_FORGE_API_KEY=your-forge-api-key
 ```
 
@@ -481,10 +481,10 @@ The application will be available at `http://localhost:3000`
 
 Configure document number formats in Settings → Document Numbering:
 
-- **Invoices**: `INV-YYYY-XXX` (e.g., INV-2024-001)
-- **Receipts**: `REC-XXXXX` (e.g., REC-00001)
-- **Quotations**: `QUOT-YYYY/MM/XXX` (e.g., QUOT-2024/10/001)
-- **Proposals**: `PROP-YYYY-XXX` (e.g., PROP-2024-001)
+- **Invoices**: `INV-XXXXXX` (e.g., INV-000001)
+- **Receipts**: `REC-XXXXXX` (e.g., REC-00001)
+- **Quotations**: `QUOT-XXXXXX` (e.g., QUOT-000001)
+- **Proposals**: `PROP-XXXXXX` (e.g., PROP-000001)
 
 ### Email Templates
 
@@ -717,7 +717,7 @@ trpc.invoices.recordPayment.useMutation()
 ### Deployment to accounts.melitechsolutions.co.ke
 
 #### Prerequisites
-- Domain: `accounts.melitechsolutions.co.ke`
+- Domain: 
 - SSL certificate
 - MySQL database
 - SMTP server
@@ -874,9 +874,9 @@ sudo certbot --nginx -d accounts.melitechsolutions.co.ke
 
 ### Contact
 - **Email**: info@melitechsolutions.co.ke
-- **Phone**: +254 700 000 000
+- **Phone**: +254 712 236 643
 - **Website**: https://www.melitechsolutions.co.ke
-- **Support Portal**: https://accounts.melitechsolutions.co.ke/support
+- **Support Portal**: https://www.melitechsolutions.co.ke/support
 
 ### Reporting Issues
 1. Check existing documentation
@@ -891,7 +891,7 @@ sudo certbot --nginx -d accounts.melitechsolutions.co.ke
 
 ## 📄 License
 
-Copyright © 2024 Melitech Solutions. All rights reserved.
+Copyright © 2026 Melitech Solutions. All rights reserved.
 
 This software is proprietary and confidential. Unauthorized copying, modification, distribution, or use of this software, via any medium, is strictly prohibited.
 
